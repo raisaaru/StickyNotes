@@ -1,0 +1,77 @@
+<header class="container-fluid bg-dark-subtle text-white p-2 mb-3">
+  <h1 class="container">Note-It project</h1>
+
+</header>
+
+<main class="container">
+  <section class="container mb-5">
+    <div class="stickit">
+    <div class="input-group">
+      <label class="input-group-text">Title</label>
+      <input class="form-control" [(ngModel)]="newTitle" >
+
+    </div>
+
+    <div class="input-group">
+      <label class="input-group-text">Description</label>
+      <textarea class="form-control" style="height: 201px"  [(ngModel)]="newDescription"></textarea>
+
+    </div>
+
+    <div class="input-group">
+      <label class="input-group-text">Color</label>
+      <div class="form-control" >
+        <button class="colorBtns"  style = "background-color: blanchedalmond" (click)="setColorToBlanch()"> </button>
+        <button class="colorBtns"  style = "background-color: khaki" (click)="setColorToKhaki()"></button>
+        <button class="colorBtns"  style = "background-color: greenyellow" (click)="setColorToGreen()"></button>
+        <button class="colorBtns"  style = "background-color: aquamarine" (click)="setColorToAqua()"></button>
+      </div>
+    </div>
+
+    </div>
+    <div>
+      <button class="input-group-text text-bg-info text-black" (click)="addNote()">Stick It</button>
+    </div>
+  </section >
+
+  <section >
+    @for (note of noteList; track note.id){
+
+
+
+
+      <div class="notes" style = "{{note.color}}" id="{{note.id}}">
+
+           <div class="title" *ngIf="note.title !== ''" >{{note.title}}</div>
+        <div class="title" *ngIf="note.title === ''" >&nbsp;</div>
+
+
+        <div class = "description">{{note.description}}</div>
+                <div class = "btnContainer">
+
+            <button class="btn btn-outline-primary m-1" (click)="changeStatus(note, noteStatus.EDIT)">&#10000;</button>
+          <button class="btn btn-outline-primary  m-1" (click)="removeNote(note)">&#10006;</button>
+
+        </div>
+
+        @if (note.status === 'editing'){
+          <div class = "notesEdit" id="{{note.id}}" >
+            <div>
+              <textarea class ="editbox1" style= "vertical-align: bottom;" [(ngModel)]="note.title"></textarea>
+            </div>
+            <div>
+              <textarea class= "editbox2" [(ngModel)]="note.description" ></textarea>
+            </div>
+            <div class = "btnContainer2"><button class="btn btn-outline-primary  m-1" (click)="changeStatus(note, noteStatus.POST)">&#10004;</button></div>
+          </div>}
+
+      </div>
+
+    }
+
+  </section>
+
+
+
+
+</main>
